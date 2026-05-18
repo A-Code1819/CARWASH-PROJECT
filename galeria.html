@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galería - Mi Empresa</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+/* =========================
+   RESET
+========================= */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  min-height: 100%;
+}
+
+body {
+  background: transparent;
+  overflow-x: hidden;
+  font-family: Arial, sans-serif;
+  color: white;
+}
+
+/* =========================
+   BACKGROUND
+========================= */
+
+.neon-background {
+  position: fixed;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  z-index: -999;
+
+  overflow: hidden;
+
+  background:
+    radial-gradient(
+      circle at left top,
+      rgba(120, 35, 0, 0.35) 0%,
+      transparent 45%
+    ),
+
+    radial-gradient(
+      circle at right top,
+      rgba(90, 90, 90, 0.25) 0%,
+      transparent 45%
+    ),
+
+    linear-gradient(
+      135deg,
+      #000000 0%,
+      #050505 35%,
+      #0d0d0d 70%,
+      #000000 100%
+    );
+}
+
+/* =========================
+   SIDE LIGHTS
+========================= */
+
+.neon-background::before,
+.neon-background::after {
+  content: "";
+
+  position: absolute;
+  top: 0;
+
+  width: 2px;
+  height: 100%;
+
+  filter: blur(1px);
+  opacity: 0.35;
+}
+
+.neon-background::before {
+  left: 9%;
+
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    #ff6a00 15%,
+    #ff6a00 85%,
+    transparent
+  );
+
+  box-shadow:
+    0 0 10px #ff6a00,
+    0 0 30px #ff6a00;
+}
+
+.neon-background::after {
+  right: 9%;
+
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    #9a9a9a 15%,
+    #9a9a9a 85%,
+    transparent
+  );
+
+  box-shadow:
+    0 0 10px rgba(180,180,180,0.4),
+    0 0 30px rgba(180,180,180,0.25);
+}
+
+/* =========================
+   RAIN
+========================= */
+
+.rain {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.drop {
+  position: absolute;
+  top: -120px;
+
+  width: 1px;
+  border-radius: 999px;
+
+  background: linear-gradient(
+    to bottom,
+    rgba(255,255,255,0.95),
+    rgba(255,255,255,0.45),
+    transparent
+  );
+
+  box-shadow:
+    0 0 6px rgba(255,255,255,0.35);
+
+  animation-name: fall;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+@keyframes fall {
+
+  0% {
+    transform: translateY(-120px);
+    opacity: 0;
+  }
+
+  10% {
+    opacity: var(--opacity, 0.7);
+  }
+
+  100% {
+    transform: translateY(110vh);
+    opacity: 0;
+  }
+}
+
+/* =========================
+   BOTTOM GLOW
+========================= */
+
+.bottom-glow {
+  position: absolute;
+
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  height: 220px;
+
+  background:
+    linear-gradient(
+      to top,
+      rgba(60,60,60,0.12),
+      rgba(20,20,20,0.06),
+      transparent
+    ),
+
+    linear-gradient(
+      to top,
+      rgba(120,40,0,0.06),
+      transparent
+    );
+
+  pointer-events: none;
+}
+
+/* =========================
+   CONTENT LAYER
+========================= */
+
+nav,
+header,
+section,
+footer,
+.booking-modal {
+  position: relative;
+  z-index: 5;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+header {
+  padding-top: 160px;
+  text-align: center;
+}
+
+header h1 {
+  font-size: clamp(3rem, 7vw, 6rem);
+  font-weight: 800;
+  letter-spacing: -3px;
+}
+
+/* =========================
+   SERVICES
+========================= */
+
+#services {
+  padding: 5rem 0 7rem;
+}
+
+.container {
+  width: min(1200px, 92%);
+  margin: auto;
+}
+
+.section-title {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.section-title h2 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.section-title p {
+  color: #c9c9c9;
+  line-height: 1.8;
+  max-width: 700px;
+  margin: auto;
+}
+
+/* GRID */
+
+.services-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(auto-fit, minmax(280px, 1fr));
+
+  gap: 2rem;
+}
+
+/* CARD */
+
+.service-card {
+  background: rgba(15,15,15,0.75);
+
+  border:
+    1px solid rgba(255,255,255,0.06);
+
+  border-radius: 24px;
+
+  overflow: hidden;
+
+  backdrop-filter: blur(14px);
+
+  transition: 0.4s ease;
+}
+
+.service-card:hover {
+  transform: translateY(-10px);
+
+  border-color:
+    rgba(255,106,0,0.35);
+
+  box-shadow:
+    0 20px 50px rgba(0,0,0,0.45);
+}
+
+/* IMAGE */
+
+.service-image {
+  width: 100%;
+  height: 240px;
+
+  object-fit: cover;
+
+  transition: 0.6s ease;
+}
+
+.service-card:hover .service-image {
+  transform: scale(1.06);
+}
+
+/* CONTENT */
+
+.service-content {
+  padding: 2rem;
+}
+
+.service-content h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.service-content p {
+  color: #c9c9c9;
+  line-height: 1.8;
+  margin-bottom: 1.5rem;
+}
+
+/* PRICE */
+
+.price-tag {
+  display: inline-flex;
+
+  padding:
+    0.75rem 1.3rem;
+
+  border-radius: 999px;
+
+  background:
+    rgba(255,106,0,0.12);
+
+  border:
+    1px solid rgba(255,106,0,0.25);
+
+  font-weight: 700;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+  padding: 2rem 0;
+  text-align: center;
+  color: #bcbcbc;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 768px) {
+
+  header {
+    padding-top: 140px;
+  }
+
+  header h1 {
+    font-size: 3.5rem;
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+</head>
+<body>
+
+ <div class="neon-background">
+    <div class="rain" id="rain"></div>
+    <div class="bottom-glow"></div>
+  </div>
+  
+    <nav>
+    <div class="container nav-content">
+
+      <div class="logo">
+        Crystal<span>Wave</span>
+      </div>
+
+      <div class="nav-links">
+        <a href="index.html">Inicio</a>
+        <a href="servicios.html">Servicios</a>
+        <a href="galeria.html">Galería</a>
+        <a href="testimonios.html">Testimonios</a>
+        <a href="contacto.html">Contacto</a>
+      </div>
+
+      <!-- BOTÓN NUEVO -->
+      <button class="btn reserve-btn">
+        Reservar
+      </button>
+
+    </div>
+  </nav>
+    <header>
+        <h1>Nuestra Galería</h1>
+    </header>
+
+  <section id="gallery">
+
+    <div class="container">
+
+      <div class="section-title">
+        <h2>Galería Premium</h2>
+
+        <p>
+          Explora algunos de nuestros trabajos más destacados y el acabado elite que ofrecemos en cada vehículo.
+        </p>
+      </div>
+
+      <div class="gallery-grid">
+        <div class="gallery-card">
+          <img src="https://images.unsplash.com/photo-1520340356584-f9917d1eea6f?q=80&w=1200&auto=format&fit=crop">
+
+          <div class="gallery-overlay">
+            <h3>Lavado Exterior</h3>
+          </div>
+        </div>
+
+        <div class="gallery-card">
+          <img src="https://www.musclehandcarwash.com.au/wp-content/uploads/2024/12/Ultimate-Guide-To-Interior-Car-Detailing-Keep-Your-Seats-And-Dashboard-Spotless.jpg" alt="Interior Detailing Premium">
+
+          <div class="gallery-overlay">
+            <h3>Interior Detailing</h3>
+          </div>
+        </div>
+
+        <div class="gallery-card">
+          <img src="https://d2jmpenrqu1d7z.cloudfront.net/wp-content/uploads/2019/11/CG_3078-Best_CeramicCoatingHeater-2048x1152.jpg" alt="Ceramic Coating Premium">
+
+          <div class="gallery-overlay">
+            <h3>Recubrimiento Cerámico</h3>
+          </div>
+        </div>
+
+        <div class="gallery-card">
+        <img src="https://luxuryservices.com.ec/wp-content/uploads/2022/12/00_ENCERADO_AUTO_LUXURY_2023-800x800-1.jpg" alt="Luxury Finish Premium">
+
+          <div class="gallery-overlay">
+            <h3>Luxury Finish</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+   <!-- MODAL -->
+  <div class="booking-modal" id="bookingModal">
+    <div class="booking-box">
+      <span class="close-modal" id="closeModal">
+        &times;
+      </span>
+
+      <h2>Reserva Tu Cita</h2>
+
+      <form class="booking-form">
+        <input type="text" placeholder="Tu Nombre" required>
+        <input type="tel" placeholder="Tu Teléfono" required>
+
+        <select required>
+          <option value="">Selecciona un servicio</option>
+          <option>Lavado Exterior</option>
+          <option>Detailing Interior</option>
+          <option>Recubrimiento Cerámico</option>
+          <option>Paquete Luxury</option>
+        </select>
+
+        <!-- CALENDARIO -->
+        <input type="text" id="calendar" placeholder="Selecciona fecha">
+
+        <select required>
+          <option value="">Selecciona una hora</option>
+          <option>08:00 AM</option>
+          <option>09:00 AM</option>
+          <option>10:00 AM</option>
+          <option>11:00 AM</option>
+          <option>12:00 PM</option>
+          <option>01:00 PM</option>
+          <option>02:00 PM</option>
+          <option>03:00 PM</option>
+          <option>04:00 PM</option>
+        </select>
+
+        <button type="submit" class="btn submit-btn">
+          Confirmar Reserva
+        </button>
+      </form>
+    </div>
+  </div>
+
+<footer>
+  <div class="container">
+    <p>&copy; 2026 Mi Empresa. Todos los derechos reservados.</p>
+  </div>
+</footer>
+<script src="main.js"></script>
+<script>
+    const rain = document.getElementById('rain');
+    const totalDrops = 180;
+
+    for (let i = 0; i < totalDrops; i++) {
+      const drop = document.createElement('div');
+      drop.className = 'drop';
+
+      const left = Math.random() * 100;
+      const height = 20 + Math.random() * 80;
+      const duration = 1 + Math.random() * 3;
+      const delay = Math.random() * 4;
+      const opacity = 0.2 + Math.random() * 0.8;
+
+      drop.style.left = left + '%';
+      drop.style.height = height + 'px';
+      drop.style.animationDuration = duration + 's';
+      drop.style.animationDelay = delay + 's';
+      drop.style.setProperty('--opacity', opacity);
+
+      rain.appendChild(drop);
+    }
+  </script>
+</body>
+</html>

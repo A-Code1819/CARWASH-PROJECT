@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacto - Mi Empresa</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav>
+    <div class="container nav-content">
+
+      <div class="logo">
+        Crystal<span>Wave</span>
+      </div>
+
+      <div class="nav-links">
+        <a href="index.html">Inicio</a>
+        <a href="servicios.html">Servicios</a>
+        <a href="galeria.html">Galería</a>
+        <a href="testimonios.html">Testimonios</a>
+        <a href="contacto.html">Contacto</a>
+      </div>
+
+      <!-- BOTÓN NUEVO -->
+      <button class="btn reserve-btn">
+        Reservar
+      </button>
+
+    </div>
+  </nav>
+    <header>
+        <h1>Contacto</h1>
+    </header>
+     
+ <!-- MODAL -->
+  <div class="booking-modal" id="bookingModal">
+    <div class="booking-box">
+      <span class="close-modal" id="closeModal">
+        &times;
+      </span>
+
+      <h2>Reserva Tu Cita</h2>
+      <form class="booking-form">
+        <input type="text" placeholder="Tu Nombre" required>
+        <input type="tel" placeholder="Tu Teléfono" required>
+
+        <select required>
+          <option value="">Selecciona un servicio</option>
+          <option>Lavado Exterior</option>
+          <option>Detailing Interior</option>
+          <option>Recubrimiento Cerámico</option>
+          <option>Paquete Luxury</option>
+        </select>
+
+        <!-- CALENDARIO -->
+        <input type="text" id="calendar" placeholder="Selecciona fecha">
+
+        <select required>
+          <option value="">Selecciona una hora</option>
+          <option>08:00 AM</option>
+          <option>09:00 AM</option>
+          <option>10:00 AM</option>
+          <option>11:00 AM</option>
+          <option>12:00 PM</option>
+          <option>01:00 PM</option>
+          <option>02:00 PM</option>
+          <option>03:00 PM</option>
+          <option>04:00 PM</option>
+        </select>
+
+        <button type="submit" class="btn submit-btn">
+          Confirmar Reserva
+        </button>
+      </form>
+    </div>
+  </div>
+</body>
+</html>
